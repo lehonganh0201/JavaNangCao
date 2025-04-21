@@ -4,11 +4,13 @@
  */
 package com.mycompany.javanangcao.de1.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author le296
  */
-public class ClientConnectionInfo {
+public class ClientConnectionInfo implements Serializable {
     private String pcName;
     private String ipAddress;
     private int port;

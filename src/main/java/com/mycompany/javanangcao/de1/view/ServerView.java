@@ -4,12 +4,11 @@
  */
 package com.mycompany.javanangcao.de1.view;
 
+import com.mycompany.javanangcao.de1.dao.ClientDAO;
 import com.mycompany.javanangcao.de1.model.ClientConnectionInfo;
-import com.mycompany.javanangcao.de1.service.ClientInfoService;
 import com.mycompany.javanangcao.de1.socket.Server;
 import com.mycompany.javanangcao.de1.table.ClientTableModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,7 +20,7 @@ public class ServerView extends javax.swing.JFrame {
     /**
      * Creates new form ServerView
      */
-    private static ClientInfoService service = new ClientInfoService();
+    private static ClientDAO service = new ClientDAO();
     private static ServerView instance;
 
     public static ServerView getInstance() {
