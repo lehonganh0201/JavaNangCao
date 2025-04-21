@@ -4,8 +4,8 @@
  */
 package com.mycompany.javanangcao.de1.socket;
 
-import com.mycompany.javanangcao.de1.dao.AccountDAO;
-import com.mycompany.javanangcao.de1.dao.ClientDAO;
+import com.mycompany.javanangcao.de1.service.AccountService;
+import com.mycompany.javanangcao.de1.service.ClientService;
 import com.mycompany.javanangcao.de1.view.ServerView;
 
 import java.io.BufferedReader;
@@ -21,8 +21,8 @@ import java.net.Socket;
 class ClientHandler implements Runnable {
 
     private Socket client;
-    private AccountDAO accountService = new AccountDAO();
-    private ClientDAO clientInfoService = new ClientDAO();
+    private AccountService accountService = new AccountService();
+    private ClientService clientInfoService = new ClientService();
 
     public ClientHandler(Socket client) {
         this.client = client;

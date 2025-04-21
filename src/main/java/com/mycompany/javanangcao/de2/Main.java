@@ -1,6 +1,7 @@
-package com.mycompany.javanangcao.de1;
+package com.mycompany.javanangcao.de2;
 
-import com.mycompany.javanangcao.de1.db.DatabaseConnector;
+
+import com.mycompany.javanangcao.de2.db.DatabaseConnector;
 
 import java.sql.SQLException;
 
@@ -9,7 +10,7 @@ public class Main {
         try {
             DatabaseConnector.getConnection();
 
-            DatabaseConnector.runSQLScript("src/main/java/com/mycompany/javanangcao/de1/file/scripts.sql");
+            DatabaseConnector.runSQLScript("src/main/java/com/mycompany/javanangcao/de2/file/scripts.sql");
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -1,21 +1,34 @@
 package com.mycompany.javanangcao.de1.dao;
 
-import com.mycompany.javanangcao.de1.file.FileConnector;
-import com.mycompany.javanangcao.de1.model.Account;
+import com.mycompany.javanangcao.de1.db.DatabaseConnector;
 
-import java.util.List;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class AccountDAO {
-    private static final String ACCOUNT_LOCATION = "./data/account.dat";
-
-    private static List<Account> accounts = FileConnector.readFromFile(ACCOUNT_LOCATION);
-
     public AccountDAO() {
     }
 
     public boolean authenticate(String username, String password) {
-        return accounts.stream()
-                .anyMatch(a -> a.getUsername().equals(username) && a.getPassword()
-                        .equals(password));
+        String sql = "SELECT * FROM Accounts WHERE username = ? AND password = ?";
+
+        try (Connection connection = DatabaseConnector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, username);
+            statement.setString(2, password);
+
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                return true;
+            }
+
+            return false;
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return false;
     }
 }
