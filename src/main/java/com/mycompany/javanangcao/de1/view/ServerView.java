@@ -4,6 +4,14 @@
  */
 package com.mycompany.javanangcao.de1.view;
 
+import com.mycompany.javanangcao.de1.model.ClientConnectionInfo;
+import com.mycompany.javanangcao.de1.service.ClientInfoService;
+import com.mycompany.javanangcao.de1.socket.Server;
+import com.mycompany.javanangcao.de1.table.ClientTableModel;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author le296
@@ -13,8 +21,28 @@ public class ServerView extends javax.swing.JFrame {
     /**
      * Creates new form ServerView
      */
+    private static ClientInfoService service = new ClientInfoService();
+    private static ServerView instance;
+
+    public static ServerView getInstance() {
+        if (instance == null) {
+            System.out.println("INSTANCE CREATE");
+            instance = new ServerView();
+        }
+        return instance;
+    }
+
     public ServerView() {
         initComponents();
+        reloadData(service.getAll());
+    }
+
+    public void reloadData(List<ClientConnectionInfo> clients) {
+        TbClient.setModel(new ClientTableModel(clients));
+    }
+
+    public void change() {
+        TbClient.setModel(new ClientTableModel(service.getAll()));
     }
 
     /**
@@ -75,6 +103,8 @@ public class ServerView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
+
     /**
      * @param args the command line arguments
      */
@@ -105,9 +135,14 @@ public class ServerView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ServerView().setVisible(true);
+                getInstance().setVisible(true);
             }
         });
+
+        new Thread(() -> {
+            Server server = new Server();
+            server.start();
+        }).start();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

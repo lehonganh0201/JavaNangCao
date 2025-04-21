@@ -4,7 +4,13 @@
  */
 package com.mycompany.javanangcao.de2.view;
 
-import com.mycompany.javanangcao.de1.view.*;
+import com.mycompany.javanangcao.de2.socket.Client;
+
+import javax.swing.*;
+import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
@@ -15,8 +21,11 @@ public class ClientView extends javax.swing.JFrame {
     /**
      * Creates new form ClientView
      */
+    private Client client;
+    
     public ClientView() {
         initComponents();
+        client = new Client();
     }
 
     /**
@@ -44,12 +53,16 @@ public class ClientView extends javax.swing.JFrame {
         txtName = new javax.swing.JTextField();
         txtCode = new javax.swing.JTextField();
         txtDateOfBirth = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
+        rbMale = new javax.swing.JRadioButton();
+        rbFemale = new javax.swing.JRadioButton();
+        cbEnglish = new javax.swing.JCheckBox();
+        cbFranch = new javax.swing.JCheckBox();
+        cbChine = new javax.swing.JCheckBox();
         txtScore = new javax.swing.JTextField();
+
+        ButtonGroup group = new ButtonGroup();
+        group.add(rbMale);
+        group.add(rbFemale);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,12 +76,32 @@ public class ClientView extends javax.swing.JFrame {
         txtStatus.setText("Chua ket noi mang");
 
         btnConnect.setText("Ket noi");
+        btnConnect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConnectActionPerformed(evt);
+            }
+        });
 
         btnSend.setText("Gui");
+        btnSend.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSendActionPerformed(evt);
+            }
+        });
 
         btnAdd.setText("Them");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         btnClose.setText("Dong");
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Ho va Ten:");
 
@@ -82,39 +115,31 @@ public class ClientView extends javax.swing.JFrame {
 
         jLabel8.setText("ĐTB:");
 
-        jRadioButton1.setSelected(true);
-        jRadioButton1.setText("Nam");
+        rbMale.setSelected(true);
+        rbMale.setText("Nam");
 
-        jRadioButton2.setText("Nu");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        rbFemale.setText("Nu");
+        rbFemale.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                rbFemaleActionPerformed(evt);
             }
         });
 
-        jCheckBox1.setText("Anh");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        cbEnglish.setText("Anh");
+        cbEnglish.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                cbEnglishActionPerformed(evt);
             }
         });
 
-        jCheckBox2.setText("Phap");
+        cbFranch.setText("Phap");
 
-        jCheckBox3.setText("TQ");
+        cbChine.setText("TQ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(149, 149, 149)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(txtStatus))
-                .addGap(37, 37, 37))
             .addGroup(layout.createSequentialGroup()
                 .addGap(97, 97, 97)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -127,10 +152,17 @@ public class ClientView extends javax.swing.JFrame {
                 .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(txtStatus))
+                        .addGap(37, 37, 37))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtScore, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jCheckBox3)
+                                .addComponent(cbChine)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(txtDateOfBirth, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
                                     .addComponent(txtCode))))
@@ -146,13 +178,13 @@ public class ClientView extends javax.swing.JFrame {
                             .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jCheckBox1))
+                                    .addComponent(rbMale, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbEnglish))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBox2)
-                                    .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(cbFranch)
+                                    .addComponent(rbFemale, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(156, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,16 +222,16 @@ public class ClientView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(rbMale)
+                    .addComponent(rbFemale))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(jCheckBox1)
-                            .addComponent(jCheckBox2)
-                            .addComponent(jCheckBox3)))
+                            .addComponent(cbEnglish)
+                            .addComponent(cbFranch)
+                            .addComponent(cbChine)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(btnAdd)))
@@ -214,13 +246,76 @@ public class ClientView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void rbFemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbFemaleActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    }//GEN-LAST:event_rbFemaleActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void cbEnglishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEnglishActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_cbEnglishActionPerformed
+
+    private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
+        try {
+            // TODO add your handling code here:
+            client.connect();
+            txtStatus.setText("Da ket noi voi server");
+            txtStatus.setForeground(Color.GREEN);
+        } catch (Exception ex) {
+            txtStatus.setText("Co loi trong qua trinh ket noi");
+        }
+    }//GEN-LAST:event_btnConnectActionPerformed
+
+    private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
+        // TODO add your handling code here:
+        String data = getStudentData();
+        client.addStudent(data);
+
+    }//GEN-LAST:event_btnSendActionPerformed
+
+    private String getStudentData() {
+        String name = txtName.getText().trim();
+        String studentId = txtCode.getText().trim();
+        String dob = txtDateOfBirth.getText().trim();
+        String gender = rbMale.isSelected() ? "Nam" : "Nữ";
+
+        StringBuilder languages = new StringBuilder();
+        if (cbEnglish.isSelected()) languages.append("Anh,");
+        if (cbFranch.isSelected()) languages.append("Pháp,");
+        if (cbChine.isSelected()) languages.append("Trung,");
+        if (languages.length() > 0) {
+            languages.setLength(languages.length() - 1);
+        }
+
+        String score = txtScore.getText().trim();
+
+        return name + ";" + studentId + ";" + dob + ";" + gender + ";" + languages + ";" + score;
+    }
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+
+        txtName.setText("");
+        txtCode.setText("");
+        txtDateOfBirth.setText("");
+        txtScore.setText("");
+        rbMale.setSelected(true);
+        cbEnglish.setSelected(false);
+        cbFranch.setSelected(false);
+        cbChine.setSelected(false);
+        txtName.requestFocus();
+
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        // TODO add your handling code here:
+
+        int result = JOptionPane.showConfirmDialog(this, "Ban co chac chan muon dong chua trinh khong", "Xac nhan", JOptionPane.YES_NO_OPTION);
+
+        if (result == JOptionPane.YES_NO_OPTION) {
+            client.closeSocket();
+            System.exit(0);
+        }
+    }//GEN-LAST:event_btnCloseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -263,9 +358,9 @@ public class ClientView extends javax.swing.JFrame {
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnConnect;
     private javax.swing.JButton btnSend;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JCheckBox cbChine;
+    private javax.swing.JCheckBox cbEnglish;
+    private javax.swing.JCheckBox cbFranch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -274,8 +369,8 @@ public class ClientView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton rbFemale;
+    private javax.swing.JRadioButton rbMale;
     private javax.swing.JTextField txtCode;
     private javax.swing.JTextField txtDateOfBirth;
     private javax.swing.JTextField txtName;

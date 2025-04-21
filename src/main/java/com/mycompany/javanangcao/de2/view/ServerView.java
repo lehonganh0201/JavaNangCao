@@ -4,7 +4,9 @@
  */
 package com.mycompany.javanangcao.de2.view;
 
-import com.mycompany.javanangcao.de1.view.*;
+import com.mycompany.javanangcao.de2.service.StudentService;
+import com.mycompany.javanangcao.de2.socket.Server;
+import com.mycompany.javanangcao.de2.table.StudentTableModel;
 
 /**
  *
@@ -15,8 +17,22 @@ public class ServerView extends javax.swing.JFrame {
     /**
      * Creates new form ServerView
      */
+
+    private static ServerView instance;
+
+    public static ServerView getInstance() {
+        if (instance == null) {
+            System.out.println("INSTANCE CREATE");
+            instance = new ServerView();
+        }
+        return instance;
+    }
+
+    private StudentService service = new StudentService();
+
     public ServerView() {
         initComponents();
+        tbStudent.setModel(new StudentTableModel(service.findAll()));
     }
 
     /**
@@ -108,9 +124,22 @@ public class ServerView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ServerView().setVisible(true);
+                getInstance().setVisible(true);
             }
         });
+
+        new Thread(() -> {
+            Server server = new Server();
+            server.start();
+        }).start();
+        
+    }
+
+    public void reloadTable() {
+        tbStudent.setModel(new StudentTableModel(service.findAll()));
+    }
+    public void change() {
+        tbStudent.setModel(new StudentTableModel(service.findAll()));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

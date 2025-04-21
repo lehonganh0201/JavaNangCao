@@ -4,6 +4,9 @@
  */
 package com.mycompany.javanangcao.de1.view;
 
+import com.mycompany.javanangcao.de1.socket.Client;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author le296
@@ -13,8 +16,11 @@ public class ClientView extends javax.swing.JFrame {
     /**
      * Creates new form ClientView
      */
+    private Client client;
+
     public ClientView() {
         initComponents();
+        client = new Client();
     }
 
     /**
@@ -47,6 +53,11 @@ public class ClientView extends javax.swing.JFrame {
         });
 
         btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,6 +104,30 @@ public class ClientView extends javax.swing.JFrame {
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPasswordActionPerformed
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        // TODO add your handling code here:
+        System.out.println("Nút hiện tại: " + btnLogin.getText());
+
+
+        if (btnLogin.getText().equals("Login")) {
+            String username = txtUsername.getText();
+            String password = new String(txtPassword.getPassword());
+
+            boolean result = client.authentication(username, password);
+
+            System.out.println("View receive: " + result);
+            if (result) {
+                JOptionPane.showMessageDialog(this, "Đăng nhập thành công", "Đăng nhập", JOptionPane.INFORMATION_MESSAGE);
+                btnLogin.setText("Logout");
+            }else {
+                JOptionPane.showMessageDialog(this, "Đăng nhập không thành công", "Đăng nhập", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            btnLogin.setText("Login");
+            client.updateLogout();
+        }
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
      * @param args the command line arguments
