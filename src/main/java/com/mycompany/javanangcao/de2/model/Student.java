@@ -4,11 +4,13 @@
  */
 package com.mycompany.javanangcao.de2.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author le296
  */
-public class Student {
+public class Student implements Serializable {
     private String fullName;
     private String studentId;
     private String dateOfBirth;

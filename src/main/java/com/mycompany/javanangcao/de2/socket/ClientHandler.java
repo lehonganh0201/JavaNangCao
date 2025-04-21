@@ -1,7 +1,7 @@
 package com.mycompany.javanangcao.de2.socket;
 
+import com.mycompany.javanangcao.de2.dao.StudentDAO;
 import com.mycompany.javanangcao.de2.model.Student;
-import com.mycompany.javanangcao.de2.service.StudentService;
 import com.mycompany.javanangcao.de2.view.ServerView;
 
 import java.io.BufferedReader;
@@ -15,7 +15,7 @@ public class ClientHandler implements Runnable{
     private BufferedReader in;
     private PrintWriter out;
 
-    private StudentService service = new StudentService();
+    private StudentDAO service = new StudentDAO();
 
     public ClientHandler(Socket socket) {
         this.socket = socket;

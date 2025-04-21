@@ -4,7 +4,7 @@
  */
 package com.mycompany.javanangcao.de2.view;
 
-import com.mycompany.javanangcao.de2.service.StudentService;
+import com.mycompany.javanangcao.de2.dao.StudentDAO;
 import com.mycompany.javanangcao.de2.socket.Server;
 import com.mycompany.javanangcao.de2.table.StudentTableModel;
 
@@ -28,7 +28,7 @@ public class ServerView extends javax.swing.JFrame {
         return instance;
     }
 
-    private StudentService service = new StudentService();
+    private StudentDAO service = new StudentDAO();
 
     public ServerView() {
         initComponents();
